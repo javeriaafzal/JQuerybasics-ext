@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head><link rel="stylesheet" type="text/css" href="cssfile.css" media="screen" /></head>
+<body>
+
+<p id ="top_header">Click the button to create a FORM and an INPUT element.</p>
+
+<button id="hide" onclick="myForm()">Create form</button>
+<button onclick="myTextbox()">Create textual text field</button>
+<button onclick="myTextbox1()">Create numeric text field</button>
+<button onclick="myText()">Create Label</button>
+<button onclick="myPass()">Create password field</button>
+<button onclick="myButton()">Create Button</button>
+<button onclick="myr()">Create Radio Button</button>
+<button onclick="myc()">Create Select</button>
+<button id="b1">Create JSON data<button>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
+<script type="text/javascript">
+var text = '{"data":[' +
+'{"firstName":"John","lastName":"Doe" },' +
+'{"firstName":"Anna","lastName":"Smith" },' +
+'{"firstName":"Peter","lastName":"Jones" }]}';
+var text = '{"data":[';
+
+   
+
+function myForm() {
+    var x = document.createElement("form");
+    x.setAttribute("id", "myForm");
+    document.body.appendChild(x);
+	
+	/*var btn = document.createElement("BUTTON");
+
+    var t = document.createTextNode("Submit");
+    btn.appendChild(t);
+    document.getElementById("myForm").appendChild(btn);*/
+	var b = document.createElement("br");
+	document.getElementById("myForm").appendChild(b);
+	var hidden = false;
+    
+      
+    document.getElementById("hide").style.visibility = 'hidden';
+        
+	
+
+    
+}
+function myTextbox() {
+  var y = document.createElement("INPUT");
+  var l = document.createElement("label");
+   var b = document.createElement("br");
+    y.setAttribute("type", "text");
+	var strng;
+	var val = prompt("Please enter the form field", "First Name");
+	var count = prompt("Do you want a max word count", "10");
+	l.appendChild(document.createTextNode(val));
+    //y.setAttribute("value", val);
+	y.setAttribute("id", val);
+	y.setAttribute("maxlength", count);
+	l.appendChild(y); 
+    document.getElementById("myForm").appendChild(l);
+	document.getElementById("myForm").appendChild(b);
+	
+	strng='{"id":"'+val+'"},'
+	//'{"id":"John"},'
+	
+    text=text+strng;
+	
+
+    
+}
+
+function myTextbox1() {
+  var y = document.createElement("INPUT");
+  var l = document.createElement("label");
+   var b = document.createElement("br");
+    y.setAttribute("type", "number");
+	var strng;
+	var val = prompt("Please enter the form label", "PhoneNumber");
+	var count = prompt("Do you want a max number count", "10");
+	l.appendChild(document.createTextNode(val));
+    //y.setAttribute("value", val);
+	y.setAttribute("id", val);
+	y.setAttribute("maxlength", count);
+	l.appendChild(y); 
+    document.getElementById("myForm").appendChild(l);
+	document.getElementById("myForm").appendChild(b);
+	
+	strng='{"id":"'+val+'"},'
+	//'{"id":"John"},'
+	
+    text=text+strng;
+	
+
+    
+}
+
+function myText() {
+   var x = document.createElement("label");
+   var val = prompt("Please enter the label field", "First Name");
+   var y = document.createTextNode(val);
+   x.setAttribute("id", val); 
+	
+    x.appendChild(y);
+    document.getElementById("myForm").appendChild(x);
+	strng='{"id":"'+val+'"},'
+	//'{"id":"John"},'
+	
+    text=text+strng;
+	
+	
+
+    
+}
+function myPass() {
+var strng;
+var count = prompt("Do you want a max pwd count", "10");
+   var y = document.createElement("INPUT");
+    y.setAttribute("type", "password");
+	y.setAttribute("id", "pwd");
+	y.setAttribute("maxlength", count);
+    document.getElementById("myForm").appendChild(y);
+	strng='{"id":"pwd"},'
+	
+    text=text+strng;
+	
+
+    
+}
+
+function myButton(){
+ var btn = document.createElement("BUTTON");
+ var val = prompt("Please enter the button label", "Click me");
+    var t = document.createTextNode(val);
+    btn.appendChild(t);
+    document.body.appendChild(btn);
+}
+
+function myr(){
+ var btn = document.createElement("Input");
+ var l = document.createElement("label");
+ var b = document.createElement("br");
+ btn.type="radio";
+
+ var val = prompt("Please enter the radio button label", "Click me");
+ var c = prompt("Do you want it to be checked by default", "True");
+  btn.setAttribute("name","lala");
+   btn.setAttribute("checked",c);
+  l.appendChild(document.createTextNode(val));
+  l.appendChild(btn);  
+    
+    document.getElementById("myForm").appendChild(l);
+	document.getElementById("myForm").appendChild(b);
+}
+
+function myc(){
+ var btn = document.createElement("Select");
+ var b = document.createElement("br");
+ var l = document.createElement("label");
+  
+   var o1=document.createElement("option");
+   t1=prompt("Please enter the option", "Option1");
+    o1.appendChild(document.createTextNode(t1));
+	btn.add(o1);
+	
+	 var o2=document.createElement("option");
+   t2=prompt("Please enter the option", "Option2");
+    o2.appendChild(document.createTextNode(t2));
+	btn.add(o2);
+	
+	 var o3=document.createElement("option");
+   t3=prompt("Please enter the option", "Option3");
+    o3.appendChild(document.createTextNode(t3));
+	btn.add(o3);
+	
+   
+
+ 
+ var val=prompt("Please enter the label", "select");
+  l.appendChild(document.createTextNode(val));
+  l.appendChild(btn);  
+    
+    document.getElementById("myForm").appendChild(l);
+	document.getElementById("myForm").appendChild(b);
+}
+
+function getAttrs(DOMelement) {
+    var obj = {};
+    $.each(DOMelement.attributes, function () {
+        if (this.specified) {
+            obj[this.name] = this.value;
+        }
+    });
+    return obj;
+}
+
+
+var updateLocalData=function(json)
+{
+localStorage.setItem('form',JSON.stringify(json));
+}
+
+//load json data from local storage
+var getLocalData=function(){
+var formData=JSON.parse(localStorage.getItem('form'));
+console.log(formData);
+if(formData!=NULL)
+{
+return buildform(formData);
+}
+}
+
+//var buildform(formData){
+//}
+
+//$(document).ready(function(){
+$("#b1").click(function(){
+alert("works");
+$("form").each(function () {
+
+alert("123");
+    var json = {
+        "form": []
+    };
+    $(this).find("input").each(function () {
+        json.form.push(getAttrs(this));
+    });
+
+    $(this).find("select").each(function () {
+        var select = getAttrs(this);
+        select["type"] = "select";
+        var options = [];
+        $(this).children().each(function () {
+            options.push(getAttrs(this));
+        });
+        select["options"] = options;
+        json.form.push(select);
+    });
+
+   console.log(json);
+}); 
+});
+
+
+
+</script>
+
+</body>
+</html>
